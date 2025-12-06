@@ -144,10 +144,18 @@ let currentPollId = null;
 let optionIndex = 0;
 
 // ===== IMAGE CROPPER STATE =====
+// ===== IMAGE CROPPER STATE =====
 let cropper = null;
 let cropTargetType = null; // 'news' or 'blog'
+
+// Normal thumbnail crops
+let croppedNewsImageBlob = null;
+let croppedBlogImageBlob = null;
+
+// Banner crops
 let croppedNewsBannerBlob = null;
 let croppedBlogBannerBlob = null;
+
 
 const imageCropModal = document.getElementById('image-crop-modal');
 const cropperImageEl = document.getElementById('cropper-image');
