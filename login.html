@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    .forgot-password {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.forgot-password a {
+  font-size: 0.9em;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Reporter - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+     <header>
+  <div class="container header-content">
+    <h1 class="logo">
+      <a href="/">
+        <video src="assets/logo.mp4"
+       autoplay
+       muted
+       loop
+       playsinline
+       class="logo-video">
+</video>
+      </a>
+    </h1>
+    <nav class="main-nav">
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="movies.html">Movie Review/Rating</a></li>
+        <li class="dropdown" id="movies-world-dropdown-desktop">
+          <a href="javascript:void(0)">Movies World <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="celebrity-profile.html">Celebrity Profile</a></li>
+            <li><a href="movies-info.html">Movies Info</a></li>
+            <li><a href="top-boxoffice.html">Top BoxOffice</a></li>
+            <li><a href="upcoming-releases.html">Upcoming Releases</a></li>
+            <li><a href="ott-releases.html">OTT Released</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">Latest News</a></li>
+        <li><a href="polling.html">Polling</a></li>
+        <li><a href="weekly-magazine.html">Weekly Magazine</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="blinking">Vote Enroll <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="awards.html?industry=Tollywood">Tollywood</a></li>
+            <li><a href="awards.html?industry=Bollywood">Bollywood</a></li>
+            <li><a href="awards.html?industry=Kollywood">Kollywood</a></li>
+            <li><a href="awards.html?industry=Mollywood">Mollywood</a></li>
+            <li><a href="awards.html?industry=Sandalwood">Sandalwood</a></li>
+            <li><a href="awards.html?industry=Hollywood">Hollywood</a></li>
+            <li><a href="awards.html?industry=Pan India">Pan India</a></li>
+          </ul>
+        </li>
+        <li class="dropdown active" id="award-winners-dropdown">
+          <a href="javascript:void(0)">Award Winners <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu" id="award-winners-year-list">
+            <li><span class="text-muted">Loading...</span></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="javascript:void(0)">About Us <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="about.html">About</a></li>
+            <li><a href="help-for-us.html">Help for Us</a></li>
+            <li><a href="promotion.html">Contact for Promotion</a></li>
+            <li><a href="copyright-policy.html">Copyright-policy</a></li>
+          </ul>
+        </li>
+        <li class="profile-link"><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+        <li class="admin-dashboard-link" style="display: none;"><a href="dashboard.html"><i class="fas fa-tools"></i> Admin Dashboard</a></li>
+        <li class="auth-links">
+          <a href="login.html" id="login-link">Login</a>
+          <button id="logout-button" style="display: none;">Logout</button>
+        </li>
+        <!-- Social Links -->
+        <div class="mobile-menu-social-links">
+          <a href="https://www.instagram.com/moviereporter.in/profilecard/?igsh=MTF0NjZocncyYnFucA==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61578330639650" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/MoviEEreporter?t=byT9A_mIBhDCrYRol8jB1g&s=08" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://youtube.com/@moviereporter_2025?si=T2ORsfYc21Xlff83" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://whatsapp.com/channel/0029VbAsNY8L7UVe3t5kgw0K" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </ul>
+
+      <!-- 🟢 Mobile Controls (Translate + Hamburger) -->
+      <div class="mobile-controls" style="display: flex; align-items: center; gap: 12px;">
+        <!-- Translate Icon with LAN -->
+        <div id="custom-translate-toggle" style="cursor: pointer;">
+  <span style="color: white; font-size: 15px;">Translate</span>
+  <img src="assets/noun-translate-hindi-to-english-2532298.svg" alt="Translate" style="width: 28px; filter: brightness(0) invert(1);" />
+</div>
+
+<!-- Custom Dropdown in Native Scripts -->
+<!-- Custom Dropdown in Native Scripts -->
+<div id="custom-translate-dropdown" class="notranslate" style="translate: no; display: none; position: absolute; top: 80px; right: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); z-index: 999;">
+  <select id="custom-translate-select" class="notranslate" style="width: 150px; padding: 5px;">
+    <option value="">Select Language</option>
+    <option value="hi">हिन्दी</option>
+    <option value="te">తెలుగు</option>
+    <option value="ta">தமிழ்</option>
+    <option value="ml">മലയാളം</option>
+    <option value="kn">ಕನ್ನಡ</option>
+    <option value="gu">ગુજરાતી</option>
+    <option value="mr">मराठी</option>
+    <option value="bn">বাংলা</option>
+    <option value="or">ଓଡ଼ିଆ</option>
+    <option value="en">English</option>
+  </select>
+</div>
+
+
+        <!-- Hamburger Icon -->
+        <div class="search-icon">
+          <div class="hamburger" id="hamburger-icon">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times" style="display: none;"></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- 🔻 Hidden Google Translate container -->
+  <div id="google_translate_element" style="display: none; position: absolute; top: 80px; right: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); z-index: 999;"></div>
+</header>
+  <div id="menu-overlay" class="menu-overlay"></div>
+    <main class="container auth-form-container">
+        <section class="section-block auth-section">
+            <h2>Login to Movie Reporter</h2>
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">Email or Mobile Number:</label>
+                    <!-- Changed type to "text" to allow both email and mobile numbers -->
+                    <input type="text" id="login-email" placeholder="Enter your email or mobile number" required>
+                </div>
+                <div class="form-group" style="position: relative;">
+  <label for="login-password">Password:</label>
+  <input type="password" id="login-password" required>
+  <i class="fas fa-eye" id="toggle-password" 
+     style="position: absolute; right: 10px; top: 72%; transform: translateY(-50%); cursor: pointer; color: #666;">
+  </i>
+</div>
+
+                <button type="submit" class="btn primary">Login</button>
+                <div class="forgot-password">
+  <a href="#" id="forgot-password-link">Forgot Password?</a>
+</div>
+
+                <p class="auth-switch">Don't have an account? <a href="register.html">Register here</a></p>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div id="voting-footer" onclick="window.location.href='awards.html'" role="banner" aria-live="polite" aria-atomic="true">
+  <!-- The blinking effect is now applied to this span -->
+  <span class="blinking-text">🎉 Vote for Your Favorite Star Now!</span>
+</div>
+    </footer>
+
+    <!-- Custom Modal for confirmations -->
+    <div id="custom-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <!-- Close button should be directly inside modal-content -->
+            <span class="close-button">&times;</span> 
+            
+            <p id="custom-modal-message" class="modal-message"></p>
+            <div class="modal-actions">
+                <button id="custom-modal-confirm-btn" class="btn primary">Confirm</button>
+                <button id="custom-modal-cancel-btn" class="btn secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <!-- End Custom Modal -->
+
+    <!-- Toast Message Container -->
+    <div id="toast-container"></div>
+
+    <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script>
+  document.getElementById("forgot-password-link")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("login-email")?.value.trim();
+    const url = email ? `forgot-password.html?email=${encodeURIComponent(email)}` : 'forgot-password.html';
+    window.location.href = url;
+  });
+</script>
+<script>
+  const passwordInput = document.getElementById("login-password");
+  const togglePassword = document.getElementById("toggle-password");
+
+  togglePassword.addEventListener("click", () => {
+    const type = passwordInput.type === "password" ? "text" : "password";
+    passwordInput.type = type;
+
+    // toggle eye / eye-slash icon
+    togglePassword.classList.toggle("fa-eye");
+    togglePassword.classList.toggle("fa-eye-slash");
+  });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Reporter - Movies World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER WILL BE INSERTED HERE FROM THE GLOBAL HEADER BLOCK -->
+   <header>
+  <div class="container header-content">
+    <h1 class="logo">
+      <a href="/">
+        <video src="assets/logo.mp4"
+       autoplay
+       muted
+       loop
+       playsinline
+       class="logo-video">
+</video>
+      </a>
+    </h1>
+    <nav class="main-nav">
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="movies.html">Movie Review/Rating</a></li>
+        <li class="dropdown" id="movies-world-dropdown-desktop">
+          <a href="javascript:void(0)">Movies World <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="celebrity-profile.html">Celebrity Profile</a></li>
+            <li><a href="movies-info.html">Movies Info</a></li>
+            <li><a href="top-boxoffice.html">Top BoxOffice</a></li>
+            <li><a href="upcoming-releases.html">Upcoming Releases</a></li>
+            <li><a href="ott-releases.html">OTT Released</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">Latest News</a></li>
+        <li><a href="polling.html">Polling</a></li>
+        <li><a href="weekly-magazine.html">Weekly Magazine</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="blinking">Vote Enroll <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="awards.html?industry=Tollywood">Tollywood</a></li>
+            <li><a href="awards.html?industry=Bollywood">Bollywood</a></li>
+            <li><a href="awards.html?industry=Kollywood">Kollywood</a></li>
+            <li><a href="awards.html?industry=Mollywood">Mollywood</a></li>
+            <li><a href="awards.html?industry=Sandalwood">Sandalwood</a></li>
+            <li><a href="awards.html?industry=Hollywood">Hollywood</a></li>
+            <li><a href="awards.html?industry=Pan India">Pan India</a></li>
+          </ul>
+        </li>
+        <li class="dropdown active" id="award-winners-dropdown">
+          <a href="javascript:void(0)">Award Winners <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu" id="award-winners-year-list">
+            <li><span class="text-muted">Loading...</span></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="javascript:void(0)">About Us <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="about.html">About</a></li>
+            <li><a href="help-for-us.html">Help for Us</a></li>
+            <li><a href="promotion.html">Contact for Promotion</a></li>
+            <li><a href="copyright-policy.html">Copyright-policy</a></li>
+          </ul>
+        </li>
+        <li class="profile-link"><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+        <li class="admin-dashboard-link" style="display: none;"><a href="dashboard.html"><i class="fas fa-tools"></i> Admin Dashboard</a></li>
+        <li class="auth-links">
+          <a href="login.html" id="login-link">Login</a>
+          <button id="logout-button" style="display: none;">Logout</button>
+        </li>
+        <!-- Social Links -->
+        <div class="mobile-menu-social-links">
+          <a href="https://www.instagram.com/moviereporter.in/profilecard/?igsh=MTF0NjZocncyYnFucA==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61578330639650" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/MoviEEreporter?t=byT9A_mIBhDCrYRol8jB1g&s=08" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://youtube.com/@moviereporter_2025?si=T2ORsfYc21Xlff83" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://whatsapp.com/channel/0029VbAsNY8L7UVe3t5kgw0K" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </ul>
+
+      <!-- 🟢 Mobile Controls (Translate + Hamburger) -->
+      <div class="mobile-controls" style="display: flex; align-items: center; gap: 12px;">
+        <!-- Translate Icon with LAN -->
+       <div id="custom-translate-toggle" style="cursor: pointer;">
+  <span style="color: white; font-size: 15px;">Translate</span>
+  <img src="assets/noun-translate-hindi-to-english-2532298.svg" alt="Translate" style="width: 28px; filter: brightness(0) invert(1);" />
+</div>
+
+<!-- Custom Dropdown in Native Scripts -->
+<!-- Custom Dropdown in Native Scripts -->
+<div id="custom-translate-dropdown" class="notranslate" style="translate: no; display: none; position: absolute; top: 80px; right: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); z-index: 999;">
+  <select id="custom-translate-select" class="notranslate" style="width: 150px; padding: 5px;">
+    <option value="">Select Language</option>
+    <option value="hi">हिन्दी</option>
+    <option value="te">తెలుగు</option>
+    <option value="ta">தமிழ்</option>
+    <option value="ml">മലയാളം</option>
+    <option value="kn">ಕನ್ನಡ</option>
+    <option value="gu">ગુજરાતી</option>
+    <option value="mr">मराठी</option>
+    <option value="bn">বাংলা</option>
+    <option value="or">ଓଡ଼ିଆ</option>
+    <option value="en">English</option>
+  </select>
+</div>
+
+
+        <!-- Hamburger Icon -->
+        <div class="search-icon">
+          <div class="hamburger" id="hamburger-icon">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times" style="display: none;"></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- 🔻 Hidden Google Translate container -->
+  <div id="google_translate_element" style="display: none; position: absolute; top: 80px; right: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); z-index: 999;"></div>
+</header>
+
+    <main class="container py-8">
+        <h1 class="text-3xl font-bold text-white mb-6">Welcome to Movies World!</h1>
+        <p class="text-gray-300 mb-8">Explore various aspects of the film industry from celebrity profiles to upcoming releases.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold text-primary-color mb-3">Celebrity Profiles</h3>
+                <p class="text-gray-400 mb-4">Discover detailed information about your favorite actors, directors, and other film personalities.</p>
+                <a href="celebrity-profile.html" class="btn primary">Explore Celebrities</a>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold text-primary-color mb-3">Movies Info</h3>
+                <p class="text-gray-400 mb-4">Browse a comprehensive database of movies, with details, cast, and more.</p>
+                <a href="movies-info.html" class="btn primary">View All Movies</a>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold text-primary-color mb-3">Most Popular & Box Office</h3>
+                <p class="text-gray-400 mb-4">See what's trending and which films are dominating the box office charts.</p>
+                <a href="top-boxoffice.html" class="btn primary">Check Box Office Hits</a>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold text-primary-color mb-3">Upcoming Releases</h3>
+                <p class="text-gray-400 mb-4">Stay updated with movies coming soon to a theater near you.</p>
+                <a href="upcoming-releases.html" class="btn primary">Discover Upcoming Films</a>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold text-primary-color mb-3">OTT Released</h3>
+                <p class="text-gray-400 mb-4">Find out which movies are available on various Over-The-Top streaming platforms.</p>
+                <a href="ott-releases.html" class="btn primary">Browse OTT Content</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Sticky Voting Footer (hidden by default) -->
+<div id="voting-footer" onclick="window.location.href='awards.html'" role="banner" aria-live="polite" aria-atomic="true">
+  <!-- The blinking effect is now applied to this span -->
+  <span class="blinking-text">🎉 Vote for Your Favorite Star Now!</span>
+</div>
+    </footer>
+
+    <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/utils.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/movies-world.js"></script> <!-- New JS for movies-world section -->
+</body>
+</html>

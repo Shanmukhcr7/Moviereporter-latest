@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Reporter - OTT Released</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Reusing movie-card styles from movies-info.html */
+        .movie-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: 250px; /* Fixed height for consistency */
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .movie-card-content {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Mobile Responsiveness for Movie Cards */
+/* Base styles for card-grid (outside media query) */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Default for larger screens */
+    gap: 25px; /* Default gap for larger screens */
+}
+
+/* Mobile Responsiveness for Movie Cards */
+@media (max-width: 768px) {
+    /* Ensure the main container allows proper spacing */
+    main.container {
+        padding-left: 1rem; /* Consistent padding for the main content */
+        padding-right: 1rem; /* Consistent padding for the main content */
+        max-width: 100%; /* Ensure it doesn't have a fixed max-width that's too small */
+        box-sizing: border-box; /* Include padding in width calculation */
+    }
+
+    .card-grid {
+        /* Allow two columns to fit on mobile screens */
+        /* minmax(140px, 1fr) means each column will be at least 140px, or take 1 fraction of available space */
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px; /* Adjust gap between cards for mobile */
+        padding: 0; /* Remove internal padding from card-grid itself if main.container handles it */
+        box-sizing: border-box;
+    }
+
+    /* Ensure movie cards can shrink to fit two per row */
+    .movie-card {
+        width: auto; /* Allow card to adjust its width based on grid */
+        max-width: none; /* Remove any previous max-width constraint */
+        margin-left: 0; /* Remove centering margins */
+        margin-right: 0;
+    }
+
+    /* Other mobile adjustments from previous responses */
+    .movie-card img {
+        height: 180px; /* Slightly smaller image height for two-column layout */
+    }
+
+    .ott-platforms-display .ott-icon {
+        width: 24px; /* Slightly smaller icons for tighter fit */
+        height: 24px;
+        background-color: white;
+    }
+
+    .ott-more-text {
+        font-size: 0.75em; /* Smaller text for "+X more" */
+        padding: 2px 5px;
+    }    
+}
+        /* Updated Search Container and Filter Styles */
+        .search-and-filter-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+            gap: 15px; /* Spacing between search bar and filter */
+            margin-bottom: 30px;
+            align-items: center; /* Vertically align items */
+        }
+
+        .search-container {
+            flex-grow: 1; /* Allow search container to take available space */
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-container input[type="text"] {
+            flex-grow: 1; /* Input takes up most of the space */
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #555;
+            background-color: white; /* Changed to white */
+            color: black; /* Changed to black */
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .search-container input[type="text"]::placeholder {
+            color: #555; /* Adjusted placeholder color for white background */
+        }
+
+        .search-container input[type="text"]:focus {
+            border-color: #888;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.2); /* Adjusted shadow for white background */
+        }
+
+        .search-container button {
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1em;
+            white-space: nowrap;
+            background-color: #007bff; /* Example primary color */
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-container button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+        
+        .ott-platforms {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .ott-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            border-radius: 4px;
+            background: #222;
+            padding: 2px;
+        }
+
+        .ott-more {
+            font-size: 0.85em;
+            color: #ccc;
+            background-color: #444;
+            padding: 2px 6px;
+            border-radius: 5px;
+        }
+        /* 🎛️ Styling the OTT Platform Filter Dropdown */
+        #ott-platform-filter {
+            padding: 10px 16px;
+            font-size: 1rem;
+            background-color: white; /* Changed to white */
+            color: black; /* Changed to black */
+            border: 1px solid #555;
+            border-radius: 8px;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            appearance: none; /* Remove default dropdown arrow */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%23000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom dropdown arrow, changed fill to black */
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 20px;
+            min-width: 160px; /* Ensure it doesn't get too small */
+        }
+
+        #ott-platform-filter option {
+            background-color: white; /* Option background changed to white */
+            color: black; /* Option text color changed to black */
+        }
+
+        #ott-platform-filter:hover,
+        #ott-platform-filter:focus {
+            border-color: #888;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.2); /* Adjusted shadow for white background */
+        }
+
+        @media (max-width: 768px) {
+            .search-and-filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            #ott-platform-filter {
+                width: 100%;
+                margin-top: 0px; /* Adjust margin for stacked layout */
+            }
+
+            .search-container {
+                width: 100%; /* Search container takes full width */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- HEADER WILL BE INSERTED HERE FROM THE GLOBAL HEADER BLOCK -->
+   <header>
+  <div class="container header-content">
+    <h1 class="logo">
+      <a href="/">
+        <video src="assets/logo.mp4"
+       autoplay
+       muted
+       loop
+       playsinline
+       class="logo-video">
+</video>
+      </a>
+    </h1>
+    <nav class="main-nav">
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="movies.html">Movie Review/Rating</a></li>
+        <li class="dropdown" id="movies-world-dropdown-desktop">
+          <a href="javascript:void(0)">Movies World <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="celebrity-profile.html">Celebrity Profile</a></li>
+            <li><a href="movies-info.html">Movies Info</a></li>
+            <li><a href="top-boxoffice.html">Top BoxOffice</a></li>
+            <li><a href="upcoming-releases.html">Upcoming Releases</a></li>
+            <li><a href="ott-releases.html">OTT Released</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">Latest News</a></li>
+        <li><a href="polling.html">Polling</a></li>
+        <li><a href="weekly-magazine.html">Weekly Magazine</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="blinking">Vote Enroll <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="awards.html?industry=Tollywood">Tollywood</a></li>
+            <li><a href="awards.html?industry=Bollywood">Bollywood</a></li>
+            <li><a href="awards.html?industry=Kollywood">Kollywood</a></li>
+            <li><a href="awards.html?industry=Mollywood">Mollywood</a></li>
+            <li><a href="awards.html?industry=Sandalwood">Sandalwood</a></li>
+            <li><a href="awards.html?industry=Hollywood">Hollywood</a></li>
+            <li><a href="awards.html?industry=Pan India">Pan India</a></li>
+          </ul>
+        </li>
+        <li class="dropdown active" id="award-winners-dropdown">
+          <a href="javascript:void(0)">Award Winners <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu" id="award-winners-year-list">
+            <li><span class="text-muted">Loading...</span></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="javascript:void(0)">About Us <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="about.html">About</a></li>
+            <li><a href="help-for-us.html">Help for Us</a></li>
+            <li><a href="promotion.html">Contact for Promotion</a></li>
+            <li><a href="copyright-policy.html">Copyright-policy</a></li>
+          </ul>
+        </li>
+        <li class="profile-link"><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+        <li class="admin-dashboard-link" style="display: none;"><a href="dashboard.html"><i class="fas fa-tools"></i> Admin Dashboard</a></li>
+        <li class="auth-links">
+          <a href="login.html" id="login-link">Login</a>
+          <button id="logout-button" style="display: none;">Logout</button>
+        </li>
+        <!-- Social Links -->
+        <div class="mobile-menu-social-links">
+          <a href="https://www.instagram.com/moviereporter.in/profilecard/?igsh=MTF0NjZocncyYnFucA==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61578330639650" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/MoviEEreporter?t=byT9A_mIBhDCrYRol8jB1g&s=08" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://youtube.com/@moviereporter_2025?si=T2ORsfYc21Xlff83" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://whatsapp.com/channel/0029VbAsNY8L7UVe3t5kgw0K" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </ul>
+
+      <!-- 🟢 Mobile Controls (Translate + Hamburger) -->
+      <div class="mobile-controls" style="display: flex; align-items: center; gap: 12px;">
+        <!-- Translate Icon with LAN -->
+       <div id="custom-translate-toggle" style="cursor: pointer;">
+  <span style="color: white; font-size: 15px;">Translate</span>
+  <img src="assets/noun-translate-hindi-to-english-2532298.svg" alt="Translate" style="width: 28px; filter: brightness(0) invert(1);" />
+</div>
+
+<!-- Custom Dropdown in Native Scripts -->
+<!-- Custom Dropdown in Native Scripts -->
+<div id="custom-translate-dropdown" class="notranslate" style="translate: no; display: none; position: absolute; top: 80px; right: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); z-index: 999;">
+  <select id="custom-translate-select" class="notranslate" style="width: 150px; padding: 5px;">
+    <option value="">Select Language</option>
+    <option value="hi">हिन्दी</option>
+    <option value="te">తెలుగు</option>
+    <option value="ta">தமிழ்</option>
+    <option value="ml">മലയാളം</option>
+    <option value="kn">ಕನ್ನಡ</option>
+    <option value="gu">ગુજરાતી</option>
+    <option value="mr">मराठी</option>
+    <option value="bn">বাংলা</option>
+    <option value="or">ଓଡ଼ିଆ</option>
+    <option value="en">English</option>
+  </select>
+</div>
+
+
+        <!-- Hamburger Icon -->
+        <div class="search-icon">
+          <div class="hamburger" id="hamburger-icon">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times" style="display: none;"></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- 🔻 Hidden Google Translate container -->
+  <div id="google_translate_element" style="display: none; position: absolute; top: 80px; right: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); z-index: 999;"></div>
+</header>
+<div id="menu-overlay" class="menu-overlay"></div>
+    <main class="container py-8">
+        <h1 class="text-3xl font-bold text-white mb-6">OTT Released</h1>
+
+        <div class="search-and-filter-container">
+            <div class="search-container">
+                <input type="text" id="ott-movies-search-input" placeholder="Search OTT Released...">
+                <button id="ott-movies-search-btn" class="btn primary">Search</button>
+            </div>
+            <select id="ott-platform-filter">
+                <option value="">All Platforms</option>
+                <option value="Netflix">Netflix</option>
+                <option value="Amazon Prime">Amazon Prime</option>
+                <option value="YouTube">YouTube</option>
+                <option value="Jio Hotstar">Jio Hotstar</option>
+                <option value="Sony Liv">Sony Liv</option>
+                <option value="Sun Nxt">Sun Nxt</option>
+                <option value="Zee TV">Zee TV</option>
+                <option value="ETV1">ETV1</option>
+                <option value="Aha">Aha</option>
+                <option value="Jio Cinema">Jio Cinema</option>
+                <option value="MX Player">MX Player</option>
+            </select>
+        </div>
+
+        <div id="ott-movies-list" class="card-grid">
+            <!-- OTT release movie cards will be loaded here by JavaScript -->
+        </div>
+        <div class="text-center mt-6">
+    <button id="load-more-ott-btn" class="btn secondary">Load More</button>
+</div>
+
+    </main>
+
+    <footer>
+        <!-- Sticky Voting Footer (hidden by default) -->
+<div id="voting-footer" onclick="window.location.href='awards.html'" role="banner" aria-live="polite" aria-atomic="true">
+  <!-- The blinking effect is now applied to this span -->
+  <span class="blinking-text">🎉 Vote for Your Favorite Star Now!</span>
+</div>
+    </footer>
+
+    <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/utils.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/ott-releases.js"></script> <!-- New JS for this page -->
+</body>
+</html>

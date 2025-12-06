@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Reporter - Celebrity Profiles</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ✅ Keep your existing card & search styling */
+    .celebrity-card { background-color: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); padding: 20px; text-align: center; transition: 0.2s; }
+    .celebrity-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.5); }
+    .celebrity-card img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--primary-color); margin-bottom: 15px; }
+    .celebrity-card h3 { font-size: 1.5em; color: var(--primary-color); }
+    .celebrity-card p { color: black; font-size: 0.95em; }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+    .search-container { display: flex; gap: 10px; margin-bottom: 30px; }
+    .search-container input { flex-grow: 1; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); }
+    .search-container button { padding: 12px 20px; border-radius: 8px; }
+    /* ✅ Mobile rectangle style */
+@media (max-width: 768px) {
+  .card-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .celebrity-card {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: left;
+  }
+
+  .celebrity-card img {
+    width: 95px;
+    height: 95px;
+    border-radius: 12px;
+    border: 2px solid var(--primary-color);
+    margin-right: 15px;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+
+  /* content block */
+  .celebrity-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+  }
+
+  .celebrity-card h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.05em;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .celebrity-card .role {
+    margin: 0 0 8px 0;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #555;
+  }
+
+  .celebrity-card .text-xs {
+    font-size: 0.8em;
+    color: #777;
+  }
+
+  .celebrity-card .btn {
+    align-self: flex-end; /* forces button to bottom right */
+    padding: 6px 12px;
+    font-size: 0.85em;
+    border-radius: 6px;
+    margin-top: auto;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- ✅ Your site header -->
+  <header>
+  <div class="container header-content">
+    <h1 class="logo">
+      <a href="/">
+        <video src="assets/logo.mp4"
+       autoplay
+       muted
+       loop
+       playsinline
+       class="logo-video">
+</video>
+      </a>
+    </h1>
+    <nav class="main-nav">
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="movies.html">Movie Review/Rating</a></li>
+        <li class="dropdown" id="movies-world-dropdown-desktop">
+          <a href="javascript:void(0)">Movies World <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="celebrity-profile.html">Celebrity Profile</a></li>
+            <li><a href="movies-info.html">Movies Info</a></li>
+            <li><a href="top-boxoffice.html">Top BoxOffice</a></li>
+            <li><a href="upcoming-releases.html">Upcoming Releases</a></li>
+            <li><a href="ott-releases.html">OTT Released</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">Latest News</a></li>
+        <li><a href="polling.html">Polling</a></li>
+        <li><a href="weekly-magazine.html">Weekly Magazine</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="blinking">Vote Enroll <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="awards.html?industry=Tollywood">Tollywood</a></li>
+            <li><a href="awards.html?industry=Bollywood">Bollywood</a></li>
+            <li><a href="awards.html?industry=Kollywood">Kollywood</a></li>
+            <li><a href="awards.html?industry=Mollywood">Mollywood</a></li>
+            <li><a href="awards.html?industry=Sandalwood">Sandalwood</a></li>
+            <li><a href="awards.html?industry=Hollywood">Hollywood</a></li>
+            <li><a href="awards.html?industry=Pan India">Pan India</a></li>
+          </ul>
+        </li>
+        <li class="dropdown active" id="award-winners-dropdown">
+          <a href="javascript:void(0)">Award Winners <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu" id="award-winners-year-list">
+            <li><span class="text-muted">Loading...</span></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="javascript:void(0)">About Us <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="about.html">About</a></li>
+            <li><a href="help-for-us.html">Help for Us</a></li>
+            <li><a href="promotion.html">Contact for Promotion</a></li>
+            <li><a href="copyright-policy.html">Copyright-policy</a></li>
+          </ul>
+        </li>
+        <li class="profile-link"><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+        <li class="admin-dashboard-link" style="display: none;"><a href="dashboard.html"><i class="fas fa-tools"></i> Admin Dashboard</a></li>
+        <li class="auth-links">
+          <a href="login.html" id="login-link">Login</a>
+          <button id="logout-button" style="display: none;">Logout</button>
+        </li>
+        <!-- Social Links -->
+        <div class="mobile-menu-social-links">
+          <a href="https://www.instagram.com/moviereporter.in/profilecard/?igsh=MTF0NjZocncyYnFucA==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61578330639650" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/MoviEEreporter?t=byT9A_mIBhDCrYRol8jB1g&s=08" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://youtube.com/@moviereporter_2025?si=T2ORsfYc21Xlff83" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://whatsapp.com/channel/0029VbAsNY8L7UVe3t5kgw0K" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </ul>
+
+      <!-- 🟢 Mobile Controls (Translate + Hamburger) -->
+      <div class="mobile-controls" style="display: flex; align-items: center; gap: 12px;">
+        <!-- Translate Icon with LAN -->
+        <div id="custom-translate-toggle" style="cursor: pointer;">
+  <span style="color: white; font-size: 15px;">Translate</span>
+  <img src="assets/noun-translate-hindi-to-english-2532298.svg" alt="Translate" style="width: 28px; filter: brightness(0) invert(1);" />
+</div>
+
+<!-- Custom Dropdown in Native Scripts -->
+<!-- Custom Dropdown in Native Scripts -->
+<div id="custom-translate-dropdown" class="notranslate" style="translate: no; display: none; position: absolute; top: 80px; right: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); z-index: 999;">
+  <select id="custom-translate-select" class="notranslate" style="width: 150px; padding: 5px;">
+    <option value="">Select Language</option>
+    <option value="hi">हिन्दी</option>
+    <option value="te">తెలుగు</option>
+    <option value="ta">தமிழ்</option>
+    <option value="ml">മലയാളം</option>
+    <option value="kn">ಕನ್ನಡ</option>
+    <option value="gu">ગુજરાતી</option>
+    <option value="mr">मराठी</option>
+    <option value="bn">বাংলা</option>
+    <option value="or">ଓଡ଼ିଆ</option>
+    <option value="en">English</option>
+  </select>
+</div>
+
+
+        <!-- Hamburger Icon -->
+        <div class="search-icon">
+          <div class="hamburger" id="hamburger-icon">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times" style="display: none;"></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- 🔻 Hidden Google Translate container -->
+  <div id="google_translate_element" style="display: none; position: absolute; top: 80px; right: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); z-index: 999;"></div>
+</header>
+<div id="menu-overlay" class="menu-overlay"></div>
+
+  <main class="container py-8">
+    <h1 class="text-3xl font-bold text-white mb-6">Celebrity Profiles</h1>
+
+    <div class="search-container">
+      <input type="text" id="celebrity-search-input" placeholder="Search celebrities...">
+      <button id="celebrity-search-btn" class="btn primary">Search</button>
+    </div>
+
+    <div id="celebrity-list" class="card-grid">
+      <!-- JS will load celebrity cards here -->
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <button id="load-more-btn" class="btn primary" style="display: none;">Load More</button>
+    </div>
+  </main>
+
+  <footer>
+    <p style="text-align:center; padding:10px;">&copy; 2025 Movie Reporter. All rights reserved.</p>
+  </footer>
+
+  <!-- ✅ Scripts -->
+  <script type="module" src="js/firebase-init.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/utils.js"></script>
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/celebrity-profile.js"></script>
+</body>
+</html>

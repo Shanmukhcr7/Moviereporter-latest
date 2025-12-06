@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    .hero-banner-slide {
+  position: relative;
+  cursor: pointer;
+}
+.hero-content {
+  pointer-events: none;
+  
+}
+.hero-content #hero-cta-button {
+  pointer-events: auto;
+}
+</style>
+<style>
+  #custom-translate-toggle {
+  display: flex !important;
+  flex-direction: column-reverse !important; /* icon first, then text */
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  gap: 4px !important;
+}
+
+#custom-translate-toggle span {
+  font-size: 10px !important; /* smaller text */
+  color: white !important;
+  text-align: center !important;
+}
+
+#custom-translate-toggle img {
+  width: 28px !important; /* keep icon size */
+  filter: brightness(0) invert(1) !important;
+}
+
+</style>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Movie Reporter - Home</title>
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- SEO Essentials -->
+<meta name="description" content="Movie Reporter brings the latest movie news, reviews, ratings, celebrity updates, and box office buzz across Indian cinema.">
+<meta name="keywords" content="Movie Reporter, Movie reviews, Bollywood, Tollywood, Kollywood, Indian cinema, OTT Released, Box office news, Awards">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.moviereporter.in/">
+
+<!-- Open Graph for Social Sharing -->
+<meta property="og:title" content="Movie Reporter - Latest Movie Reviews, News & Awards" />
+<meta property="og:description" content="Follow the biggest movie trends, reviews, and awards across all Indian cinema industries at MovieReporter.in" />
+<meta property="og:image" content="https://www.moviereporter.in/assets/logo.png" />
+<meta property="og:url" content="https://www.moviereporter.in/" />
+<meta property="og:type" content="website" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Movie Reporter - Latest Movie Reviews & News">
+<meta name="twitter:description" content="Follow trends, reviews, and awards across Bollywood, Tollywood, and more.">
+<meta name="twitter:image" content="https://www.moviereporter.in/assets/logo.png">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <header>
+  <div class="container header-content">
+    <h1 class="logo">
+      <a href="/">
+        <video src="assets/logo.mp4"
+       autoplay
+       muted
+       loop
+       playsinline
+       class="logo-video">
+</video>
+      </a>
+    </h1>
+    <nav class="main-nav">
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="movies.html">Movie Review/Rating</a></li>
+        <li class="dropdown" id="movies-world-dropdown-desktop">
+          <a href="javascript:void(0)">Movies World <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="celebrity-profile.html">Celebrity Profile</a></li>
+            <li><a href="movies-info.html">Movies Info</a></li>
+            <li><a href="top-boxoffice.html">Top BoxOffice</a></li>
+            <li><a href="upcoming-releases.html">Upcoming Releases</a></li>
+            <li><a href="ott-releases.html">OTT Released</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">Latest News</a></li>
+        <li><a href="polling.html">Polling</a></li>
+        <li><a href="weekly-magazine.html">Weekly Magazine</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="blinking">Vote Enroll <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="awards.html?industry=Tollywood">Tollywood</a></li>
+            <li><a href="awards.html?industry=Bollywood">Bollywood</a></li>
+            <li><a href="awards.html?industry=Kollywood">Kollywood</a></li>
+            <li><a href="awards.html?industry=Mollywood">Mollywood</a></li>
+            <li><a href="awards.html?industry=Sandalwood">Sandalwood</a></li>
+            <li><a href="awards.html?industry=Hollywood">Hollywood</a></li>
+            <li><a href="awards.html?industry=Pan India">Pan India</a></li>
+          </ul>
+        </li>
+        <li class="dropdown active" id="award-winners-dropdown">
+          <a href="javascript:void(0)">Award Winners <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu" id="award-winners-year-list">
+            <li><span class="text-muted">Loading...</span></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="javascript:void(0)">About Us <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="about.html">About</a></li>
+            <li><a href="help-for-us.html">Help for Us</a></li>
+            <li><a href="promotion.html">Contact for Promotion</a></li>
+            <li><a href="copyright-policy.html">Copyright-policy</a></li>
+          </ul>
+        </li>
+        <li class="profile-link"><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+        <li class="admin-dashboard-link" style="display: none;"><a href="dashboard.html"><i class="fas fa-tools"></i> Admin Dashboard</a></li>
+        <li class="auth-links">
+          <a href="login.html" id="login-link">Login</a>
+          <button id="logout-button" style="display: none; background-color: white; color: var(--primary-color);">Logout</button>
+        </li>
+
+        <!-- Social Links -->
+        <div class="mobile-menu-social-links">
+          <a href="https://www.instagram.com/moviereporter.in/profilecard/?igsh=MTF0NjZocncyYnFucA==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61578330639650" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/MoviEEreporter?t=byT9A_mIBhDCrYRol8jB1g&s=08" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://youtube.com/@moviereporter_2025?si=T2ORsfYc21Xlff83" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://whatsapp.com/channel/0029VbAsNY8L7UVe3t5kgw0K" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </ul>
+
+      <!-- 🟢 Mobile Controls -->
+      <div class="mobile-controls" style="display: flex; align-items: center; gap: 20px;">
+        <!-- Translate Icon -->
+        
+
+        <!-- Search & Hamburger -->
+        <div class="search-icon">
+          <!-- Custom Translate Button -->
+<div id="custom-translate-toggle" style="cursor: pointer;">
+  <span style="color: white; font-size: 15px;">Translate</span>
+  <img src="assets/noun-translate-hindi-to-english-2532298.svg" alt="Translate" style="width: 28px; filter: brightness(0) invert(1);" />
+</div>
+
+<!-- Custom Dropdown in Native Scripts -->
+<!-- Custom Dropdown in Native Scripts -->
+<div id="custom-translate-dropdown" class="notranslate" style="translate: no; display: none; position: absolute; top: 80px; right: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); z-index: 999;">
+  <select id="custom-translate-select" class="notranslate" style="width: 80px; padding: 5px;">
+    <option value="">Select Language</option>
+    <option value="hi">हिन्दी</option>
+    <option value="te">తెలుగు</option>
+    <option value="ta">தமிழ்</option>
+    <option value="ml">മലയാളം</option>
+    <option value="kn">ಕನ್ನಡ</option>
+    <option value="gu">ગુજરાતી</option>
+    <option value="mr">मराठी</option>
+    <option value="bn">বাংলা</option>
+    <option value="or">ଓଡ଼ିଆ</option>
+    <option value="en">English</option>
+  </select>
+</div>
+
+          <a href="javascript:void(0)" id="search-toggle"><i class="fas fa-search"></i></a>
+          <div class="hamburger" id="hamburger-icon">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times" style="display: none;"></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- 🔻 Google Translate Widget -->
+  <div id="google_translate_element" style="display: none; position: absolute; top: 80px; right: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); z-index: 999;"></div>
+</header>
+
+    <div id="menu-overlay" class="menu-overlay"></div>
+    <section class="scrolling-marquee-section">
+        <div class="marquee-label">LATEST UPDATES</div>
+        <div class="marquee-content-wrapper">
+            <div class="marquee-content" id="latest-updates-marquee">
+                <p>Loading updates...</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="hero-section">
+  <div class="hero-background-banners" id="hero-background-banners">
+    <!-- Manually inserted test slides -->
+    <div class="hero-banner-slide-active">
+      <!-- Manually inserted test slides -->
+    </div>
+    <div class="hero-banner-slide-active">
+      <!-- Manually inserted test slides -->
+    </div>
+  </div>
+
+  <div class="carousel-indicators" id="hero-carousel-indicators">
+    <span class="indicator-dot active" data-slide-index="0" aria-label="Go to slide 1" role="button" tabindex="0"></span>
+    <span class="indicator-dot" data-slide-index="1" aria-label="Go to slide 2" role="button" tabindex="0"></span>
+  </div>
+
+  <div class="hero-content">
+    <h1>Welcome to Movie Reporter</h1>
+    <p>Your ultimate destination for movie reviews, news, blogs, and awards!</p>
+    <a href="#" class="btn primary" id="hero-cta-button">Explore Now</a>
+  </div>
+
+  <div class="hero-carousel-nav">
+    <span class="hero-arrow" id="hero-carousel-prev">&#10094;</span>
+    <span class="hero-arrow" id="hero-carousel-next">&#10095;</span>
+  </div>
+</section>
+        <nav class="secondary-nav">
+            <div class="nav-scroll-wrapper">
+                <button class="nav-scroll-arrow left" aria-label="Scroll left">&#8249;</button>
+                <div class="nav-scroll-container">
+                    <ul class="secondary-nav-links">
+                        <li><a href="news.html">Latest News</a></li>
+                        <li><a href="movies.html">Movie Review/Rating</a></li>
+                        <li><a href="polling.html">Polling</a></li>
+                        <li><a href="weekly-magazine.html">Weekly-Magazine</a></li>
+                        <li><a href="ott-releases.html">OTT Released</a></li>
+                        <li><a href="blogs.html">Blogs</a></li>
+                        <li><a href="upcoming-releases.html">Upcoming Releases</a></li>
+                        <li><a href="celebrity-profile.html">Celebrity Profile</a></li>
+                        <li><a href="movies-info.html">Movies Info</a></li>
+                    </ul>
+                </div>
+                <button class="nav-scroll-arrow right" aria-label="Scroll right">&#8250;</button>
+            </div>
+        </nav>
+
+        <section class="section-block">
+  <h2>Latest Movies</h2>
+  <div class="carousel-container">
+    <div class="carousel-nav prev" id="movies-carousel-prev">
+      <i class="fas fa-chevron-left"></i>
+    </div>
+
+    <div class="latest-movies-carousel" id="latest-movies-carousel">
+      <div class="spinner"><i class="fas fa-spinner fa-spin"></i> Loading latest movies...</div>
+      <!-- Load More button will be injected here via JS -->
+    </div>
+
+    <div class="carousel-nav next" id="movies-carousel-next">
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+</section>
+
+
+        <section class="section-block">
+            <h2>Featured Articles</h2>
+            <div class="featured-articles-grid" id="featured-articles-grid">
+                <div class="spinner"><i class="fas fa-spinner fa-spin"></i> Loading featured articles...</div>
+            </div>
+            <div class="load-more-btn-container">
+                <button id="load-more-articles-btn" class="load-more-btn" style="display: none;">Load More Articles</button>
+            </div>
+        </section>
+
+        <section class="section-block">
+  <h2>Upcoming Releases</h2>
+  <div class="carousel-container">
+    <div class="carousel-nav prev" id="upcoming-carousel-prev">
+      <i class="fas fa-chevron-left"></i>
+    </div>
+    <div class="upcoming-releases-grid" id="upcoming-releases-grid">
+      <div class="spinner"><i class="fas fa-spinner fa-spin"></i> Loading upcoming movies...</div>
+      <!-- Load More button will be injected here via JS -->
+    </div>
+    <div class="carousel-nav next" id="upcoming-carousel-next">
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+</section>
+
+<section class="section-block">
+  <h2>Live Friendly Polls</h2>
+  <div id="home-polls">
+    <div class="spinner"><i class="fas fa-spinner fa-spin"></i> Loading polls...</div>
+  </div>
+  <div class="view-all-polls-container">
+    <a href="polling.html" class="view-all-polls-btn">View All Polls</a>
+  </div>
+</section>
+
+
+        <section class="section-block">
+  <h2>Weekly Magazine</h2>
+  <div class="carousel-container">
+    <div class="weekly-magazine-grid" id="weekly-magazine-grid">
+      <div class="spinner"><i class="fas fa-spinner fa-spin"></i> Loading weekly magazines...</div>
+    </div>
+    <div class="load-more-btn-container">
+      <button id="load-more-magazines-btn" class="load-more-btn" style="display: none;">Load More Magazines</button>
+    </div>
+    <a href="weekly-magazine.html" class="view-magazine">View full Magazine</a>
+  </div>
+</section>
+
+        <section class="section-block">
+  <h2>Celebrity Profiles</h2>
+  <div class="carousel-container">
+    <div class="carousel-nav prev" id="celebrity-carousel-prev">
+      <i class="fas fa-chevron-left"></i>
+    </div>
+
+    <div class="celebrity-profiles-grid" id="celebrity-profiles-grid">
+      <div class="spinner"><i class="fas fa-spinner fa-spin"></i> Loading celebrity profiles...</div>
+    </div>
+
+    <div class="carousel-nav next" id="celebrity-carousel-next">
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+</section>
+
+    </main>
+
+    <footer>
+        <!-- Sticky Voting Footer (Hidden by default) -->
+        <div id="voting-footer" onclick="window.location.href='awards.html'" role="banner" aria-live="polite" aria-atomic="true">
+            <span class="blinking-text">🎉 Vote for Your Favorite Star Now!</span>
+        </div>
+    </footer>
+
+    <div id="custom-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p id="custom-modal-message" class="modal-message"></p>
+            <div class="modal-actions">
+                <button id="custom-modal-confirm-btn" class="btn primary">Confirm</button>
+                <button id="custom-modal-cancel-btn" class="btn secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+    <div id="search-overlay" class="search-overlay">
+        <div class="search-box">
+            <input type="text" id="global-search-input" placeholder="Search anything..." />
+            <button id="global-search-btn"><i class="fas fa-search"></i></button>
+            <span id="close-search">&times;</span>
+            <div id="search-suggestions" class="search-suggestions"></div>
+        </div>
+    </div>
+    <script defer type="module" src="js/firebase-init.js"></script>
+    <script defer type="module" src="js/auth.js"></script>
+    <script defer type="module" src="js/utils.js"></script>
+    <script defer type="module" src="js/main.js"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Movie Reporter",
+  "url": "https://www.moviereporter.in",
+  "description": "Movie Reporter brings the latest movie reviews, news, celebrity updates, awards, and box office buzz from Indian cinema.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.moviereporter.in/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+</body>
+</html>

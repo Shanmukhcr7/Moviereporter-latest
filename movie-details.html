@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Reporter - Movie Details</title>
+    <!-- Plyr CSS -->
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+      .reaction-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.reaction-btn {
+  background-color: #eee;
+  border: none;
+  padding: 8px 16px;
+  font-size: 1em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.reaction-btn i {
+  margin-right: 6px;
+}
+
+.reaction-btn.liked {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.reaction-btn.disliked {
+  background-color: #f44336;
+  color: white;
+}
+
+.reaction-btn:hover {
+  opacity: 0.9;
+}
+
+        .movie-detail-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            color: black;
+        }
+
+        @media (min-width: 768px) {
+            .movie-detail-container {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }
+
+        .movie-poster-large {
+            flex-shrink: 0;
+            width: 100%;
+            max-width: 350px; /* Max width for poster on larger screens */
+            height: auto;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin: 0 auto; /* Center on small screens */
+        }
+
+        .movie-info-content {
+            flex-grow: 1;
+        }
+
+        .movie-info-content h1 {
+            font-size: 2.8em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .movie-info-content .meta-info {
+            font-size: 1em;
+            color: var(--light-gray);
+            margin-bottom: 20px;
+        }
+
+        .movie-info-content .meta-info span {
+            margin-right: 15px;
+        }
+
+        .movie-info-content .description {
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .movie-info-content h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .cast-list, .review-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .cast-list li, .review-list li {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .review-list .reviewer-info {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .review-list .review-text {
+            color: var(--light-gray);
+            font-size: 0.95em;
+        }
+
+        .loading-message, .error-message {
+            text-align: center;
+            font-size: 1.2em;
+            color: var(--light-gray);
+            margin-top: 50px;
+        }
+        .plyr__video-embed iframe {
+  width: 100%;
+  height: 100%;
+}
+
+    </style>
+</head>
+<body>
+    <!-- HEADER WILL BE INSERTED HERE FROM THE GLOBAL HEADER BLOCK -->
+    <header>
+  <div class="container header-content">
+    <h1 class="logo">
+      <a href="/">
+        <video src="assets/logo.mp4"
+       autoplay
+       muted
+       loop
+       playsinline
+       class="logo-video">
+</video>
+      </a>
+    </h1>
+    <nav class="main-nav">
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="movies.html">Movie Review/Rating</a></li>
+        <li class="dropdown" id="movies-world-dropdown-desktop">
+          <a href="javascript:void(0)">Movies World <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="celebrity-profile.html">Celebrity Profile</a></li>
+            <li><a href="movies-info.html">Movies Info</a></li>
+            <li><a href="top-boxoffice.html">Top BoxOffice</a></li>
+            <li><a href="upcoming-releases.html">Upcoming Releases</a></li>
+            <li><a href="ott-releases.html">OTT Released</a></li>
+          </ul>
+        </li>
+        <li><a href="news.html">Latest News</a></li>
+        <li><a href="polling.html">Polling</a></li>
+        <li><a href="weekly-magazine.html">Weekly Magazine</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="blinking">Vote Enroll <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="awards.html?industry=Tollywood">Tollywood</a></li>
+            <li><a href="awards.html?industry=Bollywood">Bollywood</a></li>
+            <li><a href="awards.html?industry=Kollywood">Kollywood</a></li>
+            <li><a href="awards.html?industry=Mollywood">Mollywood</a></li>
+            <li><a href="awards.html?industry=Sandalwood">Sandalwood</a></li>
+            <li><a href="awards.html?industry=Hollywood">Hollywood</a></li>
+            <li><a href="awards.html?industry=Pan India">Pan India</a></li>
+          </ul>
+        </li>
+        <li class="dropdown active" id="award-winners-dropdown">
+          <a href="javascript:void(0)">Award Winners <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu" id="award-winners-year-list">
+            <li><span class="text-muted">Loading...</span></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="javascript:void(0)">About Us <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="about.html">About</a></li>
+            <li><a href="help-for-us.html">Help for Us</a></li>
+            <li><a href="promotion.html">Contact for Promotion</a></li>
+            <li><a href="copyright-policy.html">Copyright-policy</a></li>
+          </ul>
+        </li>
+        <li class="profile-link"><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+        <li class="admin-dashboard-link" style="display: none;"><a href="dashboard.html"><i class="fas fa-tools"></i> Admin Dashboard</a></li>
+        <li class="auth-links">
+          <a href="login.html" id="login-link">Login</a>
+          <button id="logout-button" style="display: none;">Logout</button>
+        </li>
+        <!-- Social Links -->
+        <div class="mobile-menu-social-links">
+          <a href="https://www.instagram.com/moviereporter.in/profilecard/?igsh=MTF0NjZocncyYnFucA==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61578330639650" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://x.com/MoviEEreporter?t=byT9A_mIBhDCrYRol8jB1g&s=08" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://youtube.com/@moviereporter_2025?si=T2ORsfYc21Xlff83" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://whatsapp.com/channel/0029VbAsNY8L7UVe3t5kgw0K" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </ul>
+
+      <!-- 🟢 Mobile Controls (Translate + Hamburger) -->
+      <div class="mobile-controls" style="display: flex; align-items: center; gap: 12px;">
+        <!-- Translate Icon with LAN -->
+        <div id="custom-translate-toggle" style="cursor: pointer;">
+  <span style="color: white; font-size: 15px;">Translate</span>
+  <img src="assets/noun-translate-hindi-to-english-2532298.svg" alt="Translate" style="width: 28px; filter: brightness(0) invert(1);" />
+</div>
+
+<!-- Custom Dropdown in Native Scripts -->
+<!-- Custom Dropdown in Native Scripts -->
+<div id="custom-translate-dropdown" class="notranslate" style="translate: no; display: none; position: absolute; top: 80px; right: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); z-index: 999;">
+  <select id="custom-translate-select" class="notranslate" style="width: 150px; padding: 5px;">
+    <option value="">Select Language</option>
+    <option value="hi">हिन्दी</option>
+    <option value="te">తెలుగు</option>
+    <option value="ta">தமிழ்</option>
+    <option value="ml">മലയാളം</option>
+    <option value="kn">ಕನ್ನಡ</option>
+    <option value="gu">ગુજરાતી</option>
+    <option value="mr">मराठी</option>
+    <option value="bn">বাংলা</option>
+    <option value="or">ଓଡ଼ିଆ</option>
+    <option value="en">English</option>
+  </select>
+</div>
+
+
+        <!-- Hamburger Icon -->
+        <div class="search-icon">
+          <div class="hamburger" id="hamburger-icon">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times" style="display: none;"></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- 🔻 Hidden Google Translate container -->
+  <div id="google_translate_element" style="display: none; position: absolute; top: 80px; right: 20px; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); z-index: 999;"></div>
+</header>
+<div id="menu-overlay" class="menu-overlay"></div>
+    <main class="container py-8">
+        <div id="movie-details-content">
+              <!-- Inside .movie-info-content, just before or after the description -->
+<button id="movie-share-btn" class="btn secondary" style="margin-bottom: 10px;">
+  <i class="fas fa-share-alt"></i> Share
+</button>
+            <div class="loading-message">Loading movie details...</div>
+            <!-- Movie details will be loaded here by JavaScript -->
+            <!-- Example structure: -->
+            <!--
+            <div class="movie-detail-container">
+                <img id="detail-poster" src="https://placehold.co/350x500/333/eee?text=Movie+Poster" alt="Movie Title" class="movie-poster-large">
+                <div class="movie-info-content">
+                    <h1 id="detail-title">Movie Title</h1>
+                    <div class="meta-info">
+                        <span id="detail-genre">Genre: Action, Sci-Fi</span>
+                        <span id="detail-industry">Industry: Hollywood</span>
+                        <span id="detail-release-date">Release Date: 2023-10-26</span>
+                    </div>
+                    <p id="detail-description" class="description">
+                        This is a placeholder for the movie description. It will be loaded from the database.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+
+                    <h2>Cast</h2>
+                    <ul id="detail-cast-list" class="cast-list">
+                        <li>Actor Name 1 (Role)</li>
+                        <li>Actor Name 2 (Role)</li>
+                    </ul>
+
+                    <h2>Reviews</h2>
+                    <ul id="detail-reviews-list" class="review-list">
+                        <li>
+                            <p class="reviewer-info">User123 - ⭐⭐⭐⭐⭐</p>
+                            <p class="review-text">Great movie! Highly recommend.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </div>
+    </main>
+
+    <footer>
+        <!-- Sticky Voting Footer (hidden by default) -->
+<div id="voting-footer" onclick="window.location.href='awards.html'" role="banner" aria-live="polite" aria-atomic="true">
+  <!-- The blinking effect is now applied to this span -->
+  <span class="blinking-text">🎉 Vote for Your Favorite Star Now!</span>
+</div>
+    </footer>
+<!-- 🔔 Toast Container -->
+<div id="toast-container" class="toast-container"></div>
+
+    <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/utils.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/movie-details.js"></script> <!-- New JS for this page -->
+
+<!-- Plyr JS -->
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+
+</body>
+</html>
