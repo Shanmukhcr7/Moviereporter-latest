@@ -1,6 +1,18 @@
 <?php
-// --- CORS HEADERS ---
-header("Access-Control-Allow-Origin: https://moviereporter.in");
+// --- CORS HEADERS (dynamic allowed origins) ---
+$allowedOrigins = [
+    'https://moviereporter.in',
+    'https://www.moviereporter.in',
+    'https://shanmukhcr7.github.io', // admin on GitHub Pages
+];
+
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+
+if (in_array($origin, $allowedOrigins, true)) {
+    header("Access-Control-Allow-Origin: $origin");
+    header("Vary: Origin");
+}
+
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Content-Type: application/json");
